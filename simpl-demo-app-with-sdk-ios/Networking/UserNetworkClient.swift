@@ -16,13 +16,8 @@ struct UserNetworkClient {
         request.httpMethod = HTTPMethod.post.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let json = JSONEncoder()
-        
-        do {
-            request.httpBody = try json.encode(dictionary)
-        }catch {
-            NSLog("Error encoding dictionary: \(error)")
-        }
+        let jsonData = try? JSONSerialization.data(withJSONObject: dictionary, options: [])
+        request.httpBody = jsonData
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let response = response as? HTTPURLResponse,
@@ -54,16 +49,16 @@ struct UserNetworkClient {
         }.resume()
     }
     
-    func placeOrder(token: String, dictionary: [String: String], completion: @escaping (_ completed: Bool, _ dictionary: [String: Any], Error?) -> Void) {
+    func placeOrder(token: String, dictionary: [String: Any], completion: @escaping (_ completed: Bool, _ dictionary: [String: Any], Error?) -> Void) {
         chargeOrEligibiltyCheck(type: RequestEndPoint.charge.rawValue, token: token, dictionary: dictionary, completion: completion)
     }
     
-    func checkEligibility(token: String, dictionary: [String: String], completion: @escaping (_ completed: Bool, _ dictionary: [String: Any], Error?) -> Void){
+    func checkEligibility(token: String, dictionary: [String: Any], completion: @escaping (_ completed: Bool, _ dictionary: [String: Any], Error?) -> Void){
         // TODO send available credit also back.
        chargeOrEligibiltyCheck(type: RequestEndPoint.eligibility.rawValue, token: token, dictionary: dictionary, completion: completion)
     }
     
-    private func chargeOrEligibiltyCheck(type: String, token: String, dictionary: [String: String], completion: @escaping (_ completed: Bool, _ dictionary: [String: Any], Error?) -> Void){
+    private func chargeOrEligibiltyCheck(type: String, token: String, dictionary: [String: Any], completion: @escaping (_ completed: Bool, _ dictionary: [String: Any], Error?) -> Void){
         var url: URL
         
         if type == RequestEndPoint.eligibility.rawValue{
@@ -76,13 +71,8 @@ struct UserNetworkClient {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(token, forHTTPHeaderField: "zero_click_token")
         
-        let json = JSONEncoder()
-        
-        do {
-            request.httpBody = try json.encode(dictionary)
-        }catch {
-            NSLog("Error in encoding dictionary")
-        }
+        let jsonData = try? JSONSerialization.data(withJSONObject: dictionary, options: [])
+        request.httpBody = jsonData
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let response = response as? HTTPURLResponse,

@@ -9,7 +9,7 @@
 import Foundation
 
 struct Urls {
-    static let BASE_URL = "http://localhost:8080"
+    static let BASE_URL = "https://sandbox-zero-click-sample.getsimpl.com"
     
     static let PLACE_SIMPL_ORDER = Urls.BASE_URL + "/place_simpl_order"
     static let ELIGIBILITY_CHECK = Urls.BASE_URL + "/check_eligibility"

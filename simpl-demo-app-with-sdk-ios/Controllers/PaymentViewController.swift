@@ -27,9 +27,6 @@ class PaymentViewController: UIViewController {
         // Do any additional setup after loading the view.
         let total = cartController?.getTotal()
         self.setTotal(total ?? 0)
-        if (self.userModel?.hasZeroClickToken ?? false){
-            print("this user has a zero click token")
-        }
         
         // initialize simpl
         initSimpl()
@@ -128,7 +125,12 @@ class PaymentViewController: UIViewController {
     }
     
     private func performZCTransaction(){
-        let body: [String: String] = ["number": self.userModel?.phoneNumber ?? "", "amount_in_paise": "\(String(describing: cartController!.getTotal()))00", "items": ""]
+        let item: [String: String] = [
+            "sku": "some id",
+            "quantity": "12",
+            "rate_per_item": "1200"
+        ]
+        let body: [String: Any] = ["number": self.userModel?.phoneNumber ?? "", "amount_in_paise": "\(String(describing: cartController!.getTotal()))00", "items": item]
         self.userNetworkClient.placeOrder(token: zeroClickToken, dictionary: body, completion: {
             (completed, responseJson, error) in
             if let error = error {
