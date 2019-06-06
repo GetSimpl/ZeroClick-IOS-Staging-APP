@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="-680" y="127"/>
         </scene>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="simpl_demo_app_with_sdk_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="simpl_demo_app_with_sdk_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -62,7 +62,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="naP-Zr-pZc" kind="show" identifier="toCart" id="Gga-PH-l6Z"/>
+                                            <segue destination="naP-Zr-pZc" kind="show" identifier="toCart" id="AL2-6k-Clu"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -81,8 +81,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="8rF-F3-UDl"/>
                     <connections>
-                        <outlet property="email" destination="bOg-Mx-OOr" id="xnf-Vh-mSk"/>
-                        <outlet property="phoneNumber" destination="0WZ-Cf-juz" id="znu-1a-hlR"/>
+                        <outlet property="email" destination="bOg-Mx-OOr" id="i54-3p-V1f"/>
+                        <outlet property="phoneNumber" destination="0WZ-Cf-juz" id="c8B-M9-XGp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -184,7 +184,7 @@
         <scene sceneID="JW0-PB-HFW">
             <objects>
                 <viewController id="wPG-R8-wWZ" customClass="PaymentViewController" customModule="simpl_demo_app_with_sdk_ios" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Suk-R4-p9A">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="Suk-R4-p9A">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -216,7 +216,6 @@
                                 </state>
                                 <connections>
                                     <action selector="simplBtnClick:" destination="wPG-R8-wWZ" eventType="touchUpInside" id="zcm-E7-l0f"/>
-                                    <segue destination="OAS-OF-Y5y" kind="show" identifier="toCompleted" id="XHZ-lq-BaA"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -239,6 +238,7 @@
                         <outlet property="simplBtn" destination="S3p-AE-MvU" id="Cr1-8U-m8W"/>
                         <outlet property="status" destination="oEv-G6-NR2" id="KQN-eo-nxP"/>
                         <outlet property="totalAmount" destination="9HH-YU-P06" id="zj9-N8-phq"/>
+                        <segue destination="OAS-OF-Y5y" kind="show" identifier="toCompleted" id="l28-Me-MgF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PuP-hX-lI7" userLabel="First Responder" sceneMemberID="firstResponder"/>

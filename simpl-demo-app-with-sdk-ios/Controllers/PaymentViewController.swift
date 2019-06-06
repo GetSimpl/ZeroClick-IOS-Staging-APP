@@ -2,7 +2,6 @@
 //  PaymentViewController.swift
 //  simpl-demo-app-with-sdk-ios
 //
-//  Created by Eleven on 20/05/19.
 //  Copyright © 2019 Simpl Pay. All rights reserved.
 //
 
@@ -15,19 +14,16 @@ class PaymentViewController: UIViewController {
     @IBOutlet weak var status: UILabel!
     @IBOutlet weak var simplBtn: UIButton!
     
-    var cartController: CartController? = nil
+    var total: Int = 0
     var userModel: User? = nil
     var zeroClickToken: String = ""
-    var transactionStatus: TransactionStatus = TransactionStatus.incomplete
     var userNetworkClient: UserNetworkClient = UserNetworkClient()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        let total = cartController?.getTotal()
-        self.setTotal(total ?? 0)
         
+        self.setTotal(self.total)
+    
         // initialize simpl
         initSimpl()
     }
@@ -43,7 +39,9 @@ class PaymentViewController: UIViewController {
     }
     
     private func initZeroClickSDK() -> Bool {
-        GSManager.initialize(withMerchantID: "e4a905492fc1ec16d8f2d25bfd9885c7")
+        // Add your merchantID here.
+        GSManager.initialize(withMerchantID: ProcessInfo.processInfo.environment["merchant_id"] ?? "")
+        // While going live, change this to false 
         GSManager.enableSandBoxEnvironment(true)
         
         return true;
@@ -59,8 +57,8 @@ class PaymentViewController: UIViewController {
     
     private func callAproval() {
         var params: [String: Any] = [:]
-        params["transaction_amount_in_paise"] = "\(String(describing: totalAmount.text))00"
-        let user = GSUser(phoneNumber: self.userModel?.phoneNumber ?? "", email: self.userModel?.emailId ?? "")
+        params["transaction_amount_in_paise"] = "\(total * 100)"
+        let user = GSUser(phoneNumber: self.userModel!.phoneNumber, email: self.userModel!.emailId)
         user.headerParams = params
         GSManager.shared().checkApproval(for: user, onCompletion: {
           (approved, firstTransaction, text, error) in
@@ -72,49 +70,46 @@ class PaymentViewController: UIViewController {
                 self.setStatus("User is not approved")
             }
         })
-    }
+    };
     
     private func callEligility(){
-        let body: [String: String] = ["number": self.userModel?.phoneNumber ?? "", "amount_in_paise": "\(String(describing: cartController!.getTotal()))00", "items": ""]
+        let body: [String: String] = ["number": self.userModel?.phoneNumber ?? "", "amount_in_paise": "\(total * 100)", "items": ""]
         self.userNetworkClient.checkEligibility(token: zeroClickToken, dictionary: body, completion: {
             (completed, responseJson, error) in
-            if let error = error {
-                NSLog("Error: \(error)")
+            if let err : Error = error {
+                NSLog("Error: \(err.localizedDescription)")
+                self.setStatus(error!.localizedDescription)
             } else {
                 let redirection_url: String = responseJson["redirection_url"] as? String ?? ""
                 if completed{
-                    DispatchQueue.main.sync {
-                        self.setStatus("User is eligible to make this transaction")
-                        self.simplBtn.isHidden = false
-                        self.simplBtn.setTitle("Pay with simpl", for: self.simplBtn.state)
-                    }
+                    self.setStatus("User is eligible to make this transaction")
+                    self.simplBtn.isHidden = false
+                    self.simplBtn.setTitle("Pay with simpl", for: self.simplBtn.state)
                 } else if redirection_url.count > 0 {
-                    DispatchQueue.main.sync {
-                        GSManager.shared().openRedirectionURL(redirection_url, onCompletion: {
-                            (response, error) in
-                            if error != nil {
-                                NSLog("%@", error.debugDescription)
-                            } else {
-                                
-                            }
-                        })
-                    }
+                    GSManager.shared().openRedirectionURL(redirection_url, onCompletion: {
+                        (response, error) in
+                        if error != nil {
+                            NSLog("%@", error!.localizedDescription)
+                            self.setStatus("Error \(error!.localizedDescription)")
+                        } else {
+                            self.performZCTransaction()
+                        }
+                    })
                 } else {
-                    DispatchQueue.main.sync {
-                        self.setStatus("something went wrong \(String(describing: responseJson["error_code"] as? String))")
-                        self.status.textColor = UIColor.red
-                    }
+                    self.setStatus("something went wrong \(String(describing: responseJson["error_code"]))")
+                    self.status.textColor = UIColor.red
                 }
             }
         })
     }
     
     private func generateZCToken(){
-        let user = GSUser(phoneNumber: self.userModel?.phoneNumber ?? "", email: self.userModel?.emailId ?? "")
+        let user = GSUser(phoneNumber: self.userModel!.phoneNumber, email: self.userModel!.emailId)
         GSManager.shared().generateToken(for: user) {
             (jsonResponse, error) in
             if error != nil {
-                NSLog("SDK DEMO APP ERRO: %@", error.debugDescription)
+                NSLog("SDK DEMO APP ERRO: %@", error!.localizedDescription)
+                self.setStatus("SDK error in gerating zerocilck token")
             } else {
                 self.simplBtn.isEnabled = false
                 let data = jsonResponse!["data"] as! [AnyHashable: Any]
@@ -125,73 +120,44 @@ class PaymentViewController: UIViewController {
     }
     
     private func performZCTransaction(){
-        let item: [String: String] = [
+        let items: [[String: String]] = [[
             "sku": "some id",
             "quantity": "12",
             "rate_per_item": "1200"
-        ]
-        let body: [String: Any] = ["number": self.userModel?.phoneNumber ?? "", "amount_in_paise": "\(String(describing: cartController!.getTotal()))00", "items": item]
+        ]]
+        let body: [String: Any] = ["number": self.userModel!.phoneNumber, "amount_in_paise": "\(total * 100)", "items": items]
         self.userNetworkClient.placeOrder(token: zeroClickToken, dictionary: body, completion: {
             (completed, responseJson, error) in
             if let error = error {
                 NSLog("Error: \(error)")
+                self.setStatus("Error: \(error.localizedDescription)")
             } else {
-                let redirection_url: String = responseJson["redirect_url"] as? String ?? ""
+                let redirection_url = responseJson["redirect_url"] as? String
                 if completed{
-                    // TODO steps after finishing the transaction
-                    DispatchQueue.main.sync {
-                        print("transaction is completed")
-                        self.transactionStatus = TransactionStatus.complete
-                    }
-                } else if redirection_url.count > 0{
-                    DispatchQueue.main.sync {
-                        GSManager.shared().openRedirectionURL(redirection_url, onCompletion: {
-                            (response, error) in
-                            if error != nil {
-                                NSLog("%@", error.debugDescription)
-                            } else {
-                                
-                            }
-                        })
-                    }
+                    self.performSegue(withIdentifier: "toCompleted", sender: nil)
+                } else if redirection_url != nil {
+                    GSManager.shared().openRedirectionURL(redirection_url!, onCompletion: {
+                        (response, error) in
+                        if error != nil {
+                            NSLog("%@", error!.localizedDescription)
+                            self.setStatus("Error: \(error!.localizedDescription)")
+                        } else {
+                            self.performZCTransaction()
+                        }
+                    })
                 } else {
-                    DispatchQueue.main.sync {
-                        self.setStatus("something went wrong \(String(describing: responseJson["error_code"] as? String))")
-                        self.status.textColor = UIColor.red
-                    }
+                    self.setStatus("something went wrong \(String(describing: responseJson["error_code"]))")
+                    self.status.textColor = UIColor.red
                 }
             }
         })
     }
 
     @IBAction func simplBtnClick(_ sender: Any) {
-        if (self.userModel?.hasZeroClickToken ?? false){
+        if (self.userModel!.hasZeroClickToken){
             self.performZCTransaction()
         } else {
             self.generateZCToken()
         }
     }
-    
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if (identifier == "toCompleted" && self.transactionStatus == TransactionStatus.incomplete){
-            return true
-        }
-        
-        return false
-    }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    enum TransactionStatus: String {
-        case incomplete = "incomplete"
-        case complete = "complete"
-    }
-
 }

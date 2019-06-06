@@ -2,7 +2,6 @@
 //  CartViewController.swift
 //  simpl-demo-app-with-sdk-ios
 //
-//  Created by Eleven on 17/05/19.
 //  Copyright © 2019 Simpl Pay. All rights reserved.
 //
 
@@ -14,31 +13,30 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var total: UILabel!
     @IBOutlet weak var toPaymentButton: UIButton!
     
-    let cartController = CartController();
+    let cart = Cart();
     var userModel: User? = nil
     var userNetworkClient: UserNetworkClient = UserNetworkClient()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cartController.create(name: "Awesome Item 1", quantity: 0, price: 50)
-        cartController.create(name: "Awesome Item 2", quantity: 0, price: 100)
+        cart.create(name: "Awesome Item 1", quantity: 0, price: 50)
+        cart.create(name: "Awesome Item 2", quantity: 0, price: 100)
         
         tableView.dataSource = self
         tableView.delegate = self
-        let body: [String: String] = ["number": userModel?.phoneNumber ?? ""]
-        userNetworkClient.checkUserHasToken(dictionary: body, completion: { (hasToken, error) in
+        let body: [String: String] = ["number": userModel!.phoneNumber]
+        userNetworkClient.checkUserHasToken(dictionary: body, completion: { (completed, jsonResponse, error) in
             if let error = error {
                 NSLog("Error: \(error)")
             } else {
-                self.userModel?.hasZeroClickToken = hasToken
+                self.userModel?.hasZeroClickToken = jsonResponse["hasToken"] as? Bool ?? false
             }
             
         })
     }
     
     func updateView(){
-        //print(cartController.cart)
-        let _total = cartController.getTotal()
+        let _total = cart.getTotal()
         if (_total > 0){
             total.text = "Total: \(_total)"
         }else {
@@ -47,7 +45,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func tappedStepper(on cell: CartInemTableViewCell) {
-        cartController.update(name: cell.cartItemName.text ?? "", quantity: Int(cell.cartItemStepper?.value ?? 0))
+        cart.update(name: cell.cartItemName.text ?? "", quantity: Int(cell.cartItemStepper!.value))
         updateView()
     }
     
@@ -56,14 +54,14 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cartController.cart.count
+        return cart.cart.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TestCell", for: indexPath) as? CartInemTableViewCell else { fatalError("cell must have a reuse identifier") }
         
         cell.delegate = self
-        cell.cartItem = cartController.cart[indexPath.row]
+        cell.cartItem = cart.cart[indexPath.row]
         cell.cartItemName.text = cell.cartItem?.name
         
         return cell
@@ -71,7 +69,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         
-        if (cartController.getTotal() == 0){
+        if (cart.getTotal() == 0){
             return false
         }
         
@@ -81,7 +79,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "toPayment"){
             guard let paymentViewController = segue.destination as? PaymentViewController else { return }
-            paymentViewController.cartController = cartController
+            paymentViewController.total = cart.getTotal()
             paymentViewController.userModel = userModel
         }
     }

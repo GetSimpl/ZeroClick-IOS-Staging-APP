@@ -2,13 +2,12 @@
 //  CartController.swift
 //  simpl-demo-app-with-sdk-ios
 //
-//  Created by Eleven on 17/05/19.
 //  Copyright © 2019 Simpl Pay. All rights reserved.
 //
 
 import Foundation
 
-class CartController {
+class Cart {
     var cart = [Item]()
     
     func create(name: String, quantity: Int, price: Int) {

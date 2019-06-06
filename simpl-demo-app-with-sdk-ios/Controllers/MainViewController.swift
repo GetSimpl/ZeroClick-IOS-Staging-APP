@@ -2,22 +2,21 @@
 //  ViewController.swift
 //  simpl-demo-app-with-sdk-ios
 //
-//  Created by Eleven on 17/05/19.
 //  Copyright © 2019 Simpl Pay. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
     @IBOutlet weak var phoneNumber: UITextField!
     @IBOutlet weak var email: UITextField!
+    
     var user: User? = nil
     var userNetworkClient: UserNetworkClient?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

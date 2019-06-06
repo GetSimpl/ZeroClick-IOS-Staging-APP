@@ -8,19 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		18D1C120228DFE3000EFBBA4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1C11F228DFE3000EFBBA4 /* AppDelegate.swift */; };
-		18D1C122228DFE3000EFBBA4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1C121228DFE3000EFBBA4 /* ViewController.swift */; };
+		18D1C122228DFE3000EFBBA4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1C121228DFE3000EFBBA4 /* MainViewController.swift */; };
 		18D1C125228DFE3000EFBBA4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D1C123228DFE3000EFBBA4 /* Main.storyboard */; };
 		18D1C127228DFE3200EFBBA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D1C126228DFE3200EFBBA4 /* Assets.xcassets */; };
 		18D1C12A228DFE3200EFBBA4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D1C128228DFE3200EFBBA4 /* LaunchScreen.storyboard */; };
 		18D1C13B228E033400EFBBA4 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1C13A228E033400EFBBA4 /* CartViewController.swift */; };
 		18D1C13D228E078000EFBBA4 /* CartInemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1C13C228E078000EFBBA4 /* CartInemTableViewCell.swift */; };
 		18D1C140228E6E1100EFBBA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1C13F228E6E1100EFBBA4 /* User.swift */; };
-		18D1C146228E6E4700EFBBA4 /* CartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1C145228E6E4700EFBBA4 /* CartController.swift */; };
+		18D1C146228E6E4700EFBBA4 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1C145228E6E4700EFBBA4 /* Cart.swift */; };
 		18D1C148228E7E6300EFBBA4 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1C147228E7E6300EFBBA4 /* Item.swift */; };
 		18D1C14A229226D100EFBBA4 /* CartTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1C149229226D100EFBBA4 /* CartTableViewCellDelegate.swift */; };
 		18D1C14C2293156A00EFBBA4 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1C14B2293156A00EFBBA4 /* PaymentViewController.swift */; };
-		18D1C1512293883300EFBBA4 /* UserNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1C1502293883300EFBBA4 /* UserNetworkClient.swift */; };
 		18D1C153229388AF00EFBBA4 /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1C152229388AF00EFBBA4 /* Urls.swift */; };
+		18E6552822A7A679008B344E /* UserNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6552722A7A679008B344E /* UserNetworkClient.swift */; };
 		CF23B9E8EFFF87F4CA00ACAB /* Pods_simpl_demo_app_with_sdk_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5902ECBA0AAF0CAA0BB886 /* Pods_simpl_demo_app_with_sdk_ios.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +28,7 @@
 		0958A5438C40131FDFA3CF83 /* Pods-simpl-demo-app-with-sdk-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-simpl-demo-app-with-sdk-ios.debug.xcconfig"; path = "Target Support Files/Pods-simpl-demo-app-with-sdk-ios/Pods-simpl-demo-app-with-sdk-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		18D1C11C228DFE3000EFBBA4 /* simpl-demo-app-with-sdk-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "simpl-demo-app-with-sdk-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D1C11F228DFE3000EFBBA4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		18D1C121228DFE3000EFBBA4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		18D1C121228DFE3000EFBBA4 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		18D1C124228DFE3000EFBBA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		18D1C126228DFE3200EFBBA4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18D1C129228DFE3200EFBBA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,12 +36,12 @@
 		18D1C13A228E033400EFBBA4 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		18D1C13C228E078000EFBBA4 /* CartInemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartInemTableViewCell.swift; sourceTree = "<group>"; };
 		18D1C13F228E6E1100EFBBA4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		18D1C145228E6E4700EFBBA4 /* CartController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartController.swift; sourceTree = "<group>"; };
+		18D1C145228E6E4700EFBBA4 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		18D1C147228E7E6300EFBBA4 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		18D1C149229226D100EFBBA4 /* CartTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCellDelegate.swift; sourceTree = "<group>"; };
 		18D1C14B2293156A00EFBBA4 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
-		18D1C1502293883300EFBBA4 /* UserNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkClient.swift; sourceTree = "<group>"; };
 		18D1C152229388AF00EFBBA4 /* Urls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Urls.swift; sourceTree = "<group>"; };
+		18E6552722A7A679008B344E /* UserNetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNetworkClient.swift; sourceTree = "<group>"; };
 		3C5902ECBA0AAF0CAA0BB886 /* Pods_simpl_demo_app_with_sdk_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_simpl_demo_app_with_sdk_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EE23978AE6184E1F4B77B11 /* Pods-simpl-demo-app-with-sdk-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-simpl-demo-app-with-sdk-ios.release.xcconfig"; path = "Target Support Files/Pods-simpl-demo-app-with-sdk-ios/Pods-simpl-demo-app-with-sdk-ios.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,9 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				18D1C13C228E078000EFBBA4 /* CartInemTableViewCell.swift */,
-				18D1C121228DFE3000EFBBA4 /* ViewController.swift */,
+				18D1C121228DFE3000EFBBA4 /* MainViewController.swift */,
 				18D1C13A228E033400EFBBA4 /* CartViewController.swift */,
-				18D1C145228E6E4700EFBBA4 /* CartController.swift */,
 				18D1C149229226D100EFBBA4 /* CartTableViewCellDelegate.swift */,
 				18D1C14B2293156A00EFBBA4 /* PaymentViewController.swift */,
 			);
@@ -125,6 +124,7 @@
 			children = (
 				18D1C13F228E6E1100EFBBA4 /* User.swift */,
 				18D1C147228E7E6300EFBBA4 /* Item.swift */,
+				18D1C145228E6E4700EFBBA4 /* Cart.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -132,7 +132,7 @@
 		18D1C14F229385CC00EFBBA4 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				18D1C1502293883300EFBBA4 /* UserNetworkClient.swift */,
+				18E6552722A7A679008B344E /* UserNetworkClient.swift */,
 				18D1C152229388AF00EFBBA4 /* Urls.swift */,
 			);
 			path = Networking;
@@ -276,16 +276,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				18D1C13D228E078000EFBBA4 /* CartInemTableViewCell.swift in Sources */,
-				18D1C122228DFE3000EFBBA4 /* ViewController.swift in Sources */,
-				18D1C1512293883300EFBBA4 /* UserNetworkClient.swift in Sources */,
+				18D1C122228DFE3000EFBBA4 /* MainViewController.swift in Sources */,
 				18D1C153229388AF00EFBBA4 /* Urls.swift in Sources */,
 				18D1C14A229226D100EFBBA4 /* CartTableViewCellDelegate.swift in Sources */,
 				18D1C13B228E033400EFBBA4 /* CartViewController.swift in Sources */,
-				18D1C146228E6E4700EFBBA4 /* CartController.swift in Sources */,
+				18D1C146228E6E4700EFBBA4 /* Cart.swift in Sources */,
 				18D1C148228E7E6300EFBBA4 /* Item.swift in Sources */,
 				18D1C140228E6E1100EFBBA4 /* User.swift in Sources */,
 				18D1C14C2293156A00EFBBA4 /* PaymentViewController.swift in Sources */,
 				18D1C120228DFE3000EFBBA4 /* AppDelegate.swift in Sources */,
+				18E6552822A7A679008B344E /* UserNetworkClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
