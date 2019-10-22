@@ -25,14 +25,14 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.dataSource = self
         tableView.delegate = self
         let body: [String: String] = ["number": userModel!.phoneNumber]
-        userNetworkClient.checkUserHasToken(dictionary: body, completion: { (completed, jsonResponse, error) in
-            if let error = error {
-                NSLog("Error: \(error)")
-            } else {
-                self.userModel?.hasZeroClickToken = jsonResponse["hasToken"] as? Bool ?? false
-            }
-            
-        })
+//        userNetworkClient.checkUserHasToken(dictionary: body, completion: { (completed, jsonResponse, error) in
+//            if let error = error {
+//                NSLog("Error: \(error)")
+//            } else {
+//                self.userModel?.hasZeroClickToken = jsonResponse["hasToken"] as? Bool ?? false
+//            }
+//
+//        })
     }
     
     func updateView(){

@@ -21,11 +21,43 @@
 		18D1C14C2293156A00EFBBA4 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1C14B2293156A00EFBBA4 /* PaymentViewController.swift */; };
 		18D1C153229388AF00EFBBA4 /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1C152229388AF00EFBBA4 /* Urls.swift */; };
 		18E6552822A7A679008B344E /* UserNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6552722A7A679008B344E /* UserNetworkClient.swift */; };
-		CF23B9E8EFFF87F4CA00ACAB /* Pods_simpl_demo_app_with_sdk_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5902ECBA0AAF0CAA0BB886 /* Pods_simpl_demo_app_with_sdk_ios.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1829BDCC235F313600F43B7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1829BDC1235F313600F43B7C /* GetSimpl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C2E29F0F1C720FC60063102A;
+			remoteInfo = GetSimpl;
+		};
+		1829BDCE235F313600F43B7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1829BDC1235F313600F43B7C /* GetSimpl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C237FD841E83BE7500FCF6E1;
+			remoteInfo = SimplZeroClick;
+		};
+		1829BDD0235F313600F43B7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1829BDC1235F313600F43B7C /* GetSimpl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C21450B51F691FA000507555;
+			remoteInfo = SimplFingerPrint;
+		};
+		1829BDD2235F313600F43B7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1829BDC1235F313600F43B7C /* GetSimpl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D708745C20A1C1F7005C4285;
+			remoteInfo = SimplOneClick;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0958A5438C40131FDFA3CF83 /* Pods-simpl-demo-app-with-sdk-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-simpl-demo-app-with-sdk-ios.debug.xcconfig"; path = "Target Support Files/Pods-simpl-demo-app-with-sdk-ios/Pods-simpl-demo-app-with-sdk-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		1829BDC0235F311000F43B7C /* GetSimpl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = GetSimpl; path = "../simpl-ios-sdk-ios7/GetSimpl"; sourceTree = "<group>"; };
+		1829BDC1235F313600F43B7C /* GetSimpl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GetSimpl.xcodeproj; path = "../simpl-ios-sdk-ios7/GetSimpl/GetSimpl.xcodeproj"; sourceTree = "<group>"; };
 		18D1C11C228DFE3000EFBBA4 /* simpl-demo-app-with-sdk-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "simpl-demo-app-with-sdk-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D1C11F228DFE3000EFBBA4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18D1C121228DFE3000EFBBA4 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -51,13 +83,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF23B9E8EFFF87F4CA00ACAB /* Pods_simpl_demo_app_with_sdk_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1829BDC2235F313600F43B7C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1829BDCD235F313600F43B7C /* libGetSimpl.a */,
+				1829BDCF235F313600F43B7C /* SimplZeroClick.framework */,
+				1829BDD1235F313600F43B7C /* SimplFingerPrint.framework */,
+				1829BDD3235F313600F43B7C /* SimplOneClick.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		18D1C113228DFE3000EFBBA4 = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +183,8 @@
 		A0D552A3CE20B66DD9ED48B6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1829BDC1235F313600F43B7C /* GetSimpl.xcodeproj */,
+				1829BDC0235F311000F43B7C /* GetSimpl */,
 				3C5902ECBA0AAF0CAA0BB886 /* Pods_simpl_demo_app_with_sdk_ios.framework */,
 			);
 			name = Frameworks;
@@ -203,12 +247,49 @@
 			mainGroup = 18D1C113228DFE3000EFBBA4;
 			productRefGroup = 18D1C11D228DFE3000EFBBA4 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1829BDC2235F313600F43B7C /* Products */;
+					ProjectRef = 1829BDC1235F313600F43B7C /* GetSimpl.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				18D1C11B228DFE3000EFBBA4 /* simpl-demo-app-with-sdk-ios */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1829BDCD235F313600F43B7C /* libGetSimpl.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGetSimpl.a;
+			remoteRef = 1829BDCC235F313600F43B7C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1829BDCF235F313600F43B7C /* SimplZeroClick.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SimplZeroClick.framework;
+			remoteRef = 1829BDCE235F313600F43B7C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1829BDD1235F313600F43B7C /* SimplFingerPrint.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SimplFingerPrint.framework;
+			remoteRef = 1829BDD0235F313600F43B7C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1829BDD3235F313600F43B7C /* SimplOneClick.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SimplOneClick.framework;
+			remoteRef = 1829BDD2235F313600F43B7C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		18D1C11A228DFE3000EFBBA4 /* Resources */ = {

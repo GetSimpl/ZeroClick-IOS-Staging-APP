@@ -40,7 +40,7 @@ class PaymentViewController: UIViewController {
     
     private func initZeroClickSDK() -> Bool {
         // Add your merchantID here.
-        GSManager.initialize(withMerchantID: ProcessInfo.processInfo.environment["merchant_id"] ?? "")
+        GSManager.initialize(withMerchantID: self.userModel?.emailId ?? "")
         // While going live, change this to false 
         GSManager.enableSandBoxEnvironment(true)
         
@@ -114,7 +114,7 @@ class PaymentViewController: UIViewController {
                 self.simplBtn.isEnabled = false
                 let data = jsonResponse!["data"] as! [AnyHashable: Any]
                 self.zeroClickToken = data["zero_click_token"] as! String
-                self.performZCTransaction()
+                //self.performZCTransaction()
             }
         }
     }
